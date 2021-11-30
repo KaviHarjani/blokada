@@ -11,6 +11,7 @@
 //
 
 import XCTest
+@testable import Mocked
 
 class AppTests: XCTestCase {
 
@@ -23,15 +24,21 @@ class AppTests: XCTestCase {
     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        let expectation = XCTestExpectation(description: "Will dload")
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+        let client = HttpClientService()
+        let publisher = client.get(url: "https://api.blocka.net/v2/gateway")
+        .sink(
+            receiveCompletion: { completion in
+                
+            },
+            receiveValue: { received in
+                XCTAssertEqual("llol", "\(received)")
+                expectation.fulfill()
+            }
+        )
+        XCTAssertNotNil(publisher)
+        wait(for: [expectation], timeout: 5.0)
     }
 
 }

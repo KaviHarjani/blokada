@@ -62,6 +62,14 @@ extension Encodable {
             return nil
         }
     }
+
+    func toJsonData() -> Data? {
+        do {
+            return try encoder.encode(self)
+        } catch {
+            return nil
+        }
+    }
 }
 
 /**
