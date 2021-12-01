@@ -24,21 +24,36 @@ class AppTests: XCTestCase {
     }
 
     func testExample() throws {
-        let expectation = XCTestExpectation(description: "Will dload")
+        let expectation = XCTestExpectation(description: "1")
+        let expectation3 = XCTestExpectation(description: "2")
 
-        let client = HttpClientService()
-        let publisher = client.get(url: "https://api.blocka.net/v2/gateway")
+        let subject = ConfigService(
+            remote: ICloudPersistenceService(),
+            remoteLegacy: KeychainPersistenceService()
+        )
+
+        let publisher = subject.account
         .sink(
             receiveCompletion: { completion in
                 
             },
             receiveValue: { received in
-                XCTAssertEqual("llol", "\(received)")
+                XCTAssertEqual("rmiqpzizmfuu", received.id)
                 expectation.fulfill()
             }
         )
         XCTAssertNotNil(publisher)
-        wait(for: [expectation], timeout: 5.0)
+
+        let pub2 = subject.hasAccount.sink { completion in
+            
+        } receiveValue: { it in
+            XCTAssertEqual(true, it)
+            expectation3.fulfill()
+        }
+        XCTAssertNotNil(pub2)
+
+
+        wait(for: [expectation, expectation3], timeout: 5.0)
     }
 
 }

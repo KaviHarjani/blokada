@@ -224,6 +224,8 @@
 		4E85E98B243382B3001B2795 /* BlockaApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E85E98A243382B3001B2795 /* BlockaApiModel.swift */; };
 		4E8AE1E12756974F00BD2E5B /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8AE1E02756974F00BD2E5B /* ConfigService.swift */; };
 		4E8AE1E22756974F00BD2E5B /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8AE1E02756974F00BD2E5B /* ConfigService.swift */; };
+		4E8AE1E42757940300BD2E5B /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8AE1E32757940300BD2E5B /* PersistenceService.swift */; };
+		4E8AE1E52757940300BD2E5B /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8AE1E32757940300BD2E5B /* PersistenceService.swift */; };
 		4E94C2FD2420B0A60008E318 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E94C2FC2420B0A60008E318 /* LocationView.swift */; };
 		4E94C2FF2420D3B00008E318 /* PaymentGatewayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E94C2FE2420D3B00008E318 /* PaymentGatewayView.swift */; };
 		4E94C3032428F1C20008E318 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E94C3022428F1C20008E318 /* Logger.swift */; };
@@ -443,6 +445,7 @@
 		4E8800F425C401CE001FD4C9 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/PackTags.strings; sourceTree = "<group>"; };
 		4E8800F525C401CE001FD4C9 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Ui.strings; sourceTree = "<group>"; };
 		4E8AE1E02756974F00BD2E5B /* ConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
+		4E8AE1E32757940300BD2E5B /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		4E94C2FC2420B0A60008E318 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		4E94C2FE2420D3B00008E318 /* PaymentGatewayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentGatewayView.swift; sourceTree = "<group>"; };
 		4E94C3022428F1C20008E318 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -664,6 +667,7 @@
 				4E4235532450714E005A0779 /* SharedActionsService.swift */,
 				4E356A8D243B230D0094EE27 /* StoreKitWrapper.swift */,
 				4E227F3824347A95004F4955 /* VpnService.swift */,
+				4E8AE1E32757940300BD2E5B /* PersistenceService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1251,6 +1255,7 @@
 				4E356A8824376B3A0094EE27 /* SplashView.swift in Sources */,
 				4E53CCC9244E39F5009B3CF0 /* PaymentListView.swift in Sources */,
 				4E42354B244F9198005A0779 /* LeaseViewModel.swift in Sources */,
+				4E8AE1E42757940300BD2E5B /* PersistenceService.swift in Sources */,
 				4E78E35A245EBFD90017B234 /* Sequence+Extensions.swift in Sources */,
 				4E290FC32498A8EB00FC4C61 /* UiGen.swift in Sources */,
 				4EEF1BEC2457FBD900734182 /* DebugView.swift in Sources */,
@@ -1429,6 +1434,7 @@
 				4E7FE9C4244DC28900851E9F /* Logger.swift in Sources */,
 				4E42353E244F3D21005A0779 /* LocationListViewModel.swift in Sources */,
 				4E7FE9C5244DC28900851E9F /* LocationListView.swift in Sources */,
+				4E8AE1E52757940300BD2E5B /* PersistenceService.swift in Sources */,
 				4ED41CC82478458100155C88 /* SearchBar.swift in Sources */,
 				4E59E31C24751D13008C1AAA /* ExpirationService.swift in Sources */,
 				4E78E358245DB4D80017B234 /* InboxView.swift in Sources */,
