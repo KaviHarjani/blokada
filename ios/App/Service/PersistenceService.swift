@@ -18,6 +18,33 @@ protocol PersistenceService {
     func setString(_ value: String, forKey: String) -> AnyPublisher<Void, Error>
 }
 
+class LocalStoragePersistenceService: PersistenceService {
+
+    private let localStorage = UserDefaults.standard
+
+    func getString(forKey: String) -> AnyPublisher<String, Error> {
+        return Deferred { () -> AnyPublisher<String, Error> in
+            guard let it = self.localStorage.string(forKey: forKey) else {
+                return Fail<String, Error>(error: CommonError.emptyResult)
+                    .eraseToAnyPublisher()
+            }
+
+            return Just(it).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func setString(_ value: String, forKey: String) -> AnyPublisher<Void, Error> {
+        return Deferred { () -> AnyPublisher<Void, Error> in
+            self.localStorage.set(value, forKey: forKey)
+
+            return Empty<Void, Error>().eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
+    }
+
+}
+
 class ICloudPersistenceService: PersistenceService {
 
     private let iCloud = NSUbiquitousKeyValueStore()
@@ -25,7 +52,8 @@ class ICloudPersistenceService: PersistenceService {
     func getString(forKey: String) -> AnyPublisher<String, Error> {
         return Deferred { () -> AnyPublisher<String, Error> in
             guard let it = self.iCloud.string(forKey: forKey) else {
-                return Empty<String, Error>().eraseToAnyPublisher()
+                return Fail<String, Error>(error: CommonError.emptyResult)
+                    .eraseToAnyPublisher()
             }
 
             return Just(it).setFailureType(to: Error.self).eraseToAnyPublisher()
@@ -55,7 +83,8 @@ class KeychainPersistenceService: PersistenceService {
     func getString(forKey: String) -> AnyPublisher<String, Error> {
         return Deferred { () -> AnyPublisher<String, Error> in
             guard let it = self.keychain.get(forKey) else {
-                return Empty<String, Error>().eraseToAnyPublisher()
+                return Fail<String, Error>(error: CommonError.emptyResult)
+                    .eraseToAnyPublisher()
             }
 
             return Just(it).setFailureType(to: Error.self).eraseToAnyPublisher()

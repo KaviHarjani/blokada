@@ -27,12 +27,12 @@ class AppTests: XCTestCase {
         let expectation = XCTestExpectation(description: "1")
         let expectation3 = XCTestExpectation(description: "2")
 
-        let subject = ConfigService(
+        let subject = AccountRepository(
             remote: ICloudPersistenceService(),
             remoteLegacy: KeychainPersistenceService()
         )
 
-        let publisher = subject.account
+        let publisher = pubs.account
         .sink(
             receiveCompletion: { completion in
                 
@@ -44,7 +44,7 @@ class AppTests: XCTestCase {
         )
         XCTAssertNotNil(publisher)
 
-        let pub2 = subject.hasAccount.sink { completion in
+        let pub2 = pubs.hasAccount.sink { completion in
             
         } receiveValue: { it in
             XCTAssertEqual(true, it)
@@ -54,6 +54,25 @@ class AppTests: XCTestCase {
 
 
         wait(for: [expectation, expectation3], timeout: 5.0)
+    }
+
+    func testBlockaApiClients() throws {
+        let expectation = XCTestExpectation(description: "1")
+
+        let client = BlockaApiCurrentUserService(client: BlockaApiService2(client: HttpClientService()))
+
+        pubs.writeAccount.send(Account(id: "mockedmocked", active_until: "", active: false, type: "free"))
+
+        let pub = client.getAccountForCurrentUser().sink(
+            receiveCompletion: { completion in },
+            receiveValue: { it in
+                XCTAssertEqual("mockedmocked", it.id)
+                expectation.fulfill()
+            }
+        )
+        XCTAssertNotNil(pub)
+        
+        wait(for: [expectation], timeout: 5.0)
     }
 
 }
